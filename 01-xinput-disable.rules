@@ -1,0 +1,1 @@
+RUN+="/bin/sh -c '/usr/bin/xinput list --name-only | grep ^xwayland-pointer-gestures | /usr/bin/xargs -n1 /usr/bin/xinput disable'"
