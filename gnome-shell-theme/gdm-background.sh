@@ -2,10 +2,10 @@
 
 #IMAGE=~/Bat.jpg sh gdm-background.sh
 
-IMAGE=$HOME/Projetos/gnome/theme/desktop-login-background-white.png
-WORKDIR=$HOME/Projetos/gnome/theme/tmp/
+IMAGE=$PWD/desktop-login-background-white.png
+WORKDIR=$PWD/tmp
 #GST=/usr/share/gnome-shell/gnome-shell-theme.gresource
-GST=$HOME/Projetos/gnome/theme/gnome-shell-theme.gresource
+GST=$PWD/gnome-shell-theme.gresource
 GSTRES=$(basename $GST)
 GSTFILE="$WORKDIR/$GSTRES.xml"
 
