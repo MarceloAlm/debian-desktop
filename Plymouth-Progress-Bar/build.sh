@@ -32,16 +32,17 @@ do
             cp $f/progress-box.png $build/$name &&
 
             sed "s/::NAME::/$name/g" plymouth > $build/$name/$name.plymouth &&
-            cat script > $build/$name/$name.script &&
-
-            python3 -B ./create-screenshots.py --path=$build/$name &&
+            cat script.sh > $build/$name/$name.script
 
             # creates/updates readme screenshots
+            python3 -B ./create-screenshots.py --path=$build/$name &&
             cp $build/$name/screenshots/1920x1080.png ./screenshots/$name.png &&
             cp $build/$name/screenshots/1920x1080-encrypted.png ./screenshots/$name-encrypted.png
             ) || exit 1
         fi
     done;
 done;
+
+cp -r ./build/debian-white-branded/ /usr/share/plymouth/themes/
 
 echo "Done!"
