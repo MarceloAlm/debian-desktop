@@ -132,6 +132,17 @@ message_sprites = [];
 message_sprite_count = 0;
 message_sprite_y = (progress_bar.y + progress_box.image.GetHeight()*2);
 
+
+fun progress_callback(duration, progress) {
+    if (global.status != "password") {
+        
+        progress_bar.image = progress_bar.original_image.Scale(progress_bar.original_image.GetWidth(progress_bar.original_image) * progress, progress_bar.original_image.GetHeight());
+        progress_bar.sprite.SetImage(progress_bar.image);
+        # if (progress_bar.image.GetWidth() != Math.Int(progress_bar.original_image.GetWidth() * progress)) {
+        # }
+    }
+}
+
 status = "normal";
 
 Plymouth.SetDisplayNormalFunction(display_normal_callback);
@@ -143,15 +154,6 @@ Plymouth.SetHideMessageFunction(hide_message_callback);
 if (Plymouth.GetMode() == "boot") {
     progress_box.sprite.SetPosition(progress_box.x, progress_box.y, 0);
     progress_bar.sprite.SetPosition(progress_bar.x, progress_bar.y, 1);
-
-    fun progress_callback(duration, progress) {
-        if (global.status != "password") {
-            if (progress_bar.image.GetWidth() != Math.Int(progress_bar.original_image.GetWidth() * progress)) {
-                progress_bar.image = progress_bar.original_image.Scale(progress_bar.original_image.GetWidth(progress_bar.original_image) * progress, progress_bar.original_image.GetHeight());
-                progress_bar.sprite.SetImage(progress_bar.image);
-            }
-        }
-    }
 
     Plymouth.SetBootProgressFunction(progress_callback);
 }
