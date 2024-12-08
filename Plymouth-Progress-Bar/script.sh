@@ -1,4 +1,5 @@
 # This theme is based on Micheal Bearly's Apple Mac Plymouth Bar: https://www.opencode.net/mikebearly/apple-mac-plymouth
+# more info https://wiki.gentoo.org/wiki/User:DerpDays/Plymouth/Theming
 
 fun dialog_setup() {
     local.box;
@@ -11,7 +12,7 @@ fun dialog_setup() {
     
     box.sprite = Sprite(box.image);
     box.x = ((Window.GetX() + Window.GetWidth()) / 2) - (box.image.GetWidth() / 2);
-    box.y = (Window.GetY() + (4 * (Window.GetHeight() / 5))) - (box.image.GetHeight() / 2);
+    box.y = (Window.GetY() + (Window.GetHeight() * 0.9) - (box.image.GetHeight() / 2));
     box.z = 10000;
     box.sprite.SetPosition(box.x, box.y, box.z);
     
@@ -134,13 +135,12 @@ message_sprite_y = (progress_bar.y + progress_box.image.GetHeight()*2);
 
 
 fun progress_callback(duration, progress) {
-    if (global.status != "password") {
-        
-        progress_bar.image = progress_bar.original_image.Scale(progress_bar.original_image.GetWidth(progress_bar.original_image) * progress, progress_bar.original_image.GetHeight());
-        progress_bar.sprite.SetImage(progress_bar.image);
-        # if (progress_bar.image.GetWidth() != Math.Int(progress_bar.original_image.GetWidth() * progress)) {
-        # }
-    }
+    progress_bar.image = progress_bar.original_image.Scale(progress_bar.original_image.GetWidth(progress_bar.original_image) * progress, progress_bar.original_image.GetHeight());
+    progress_bar.sprite.SetImage(progress_bar.image);
+}
+
+fun boot_complete() {
+    progress_bar.sprite.SetImage(progress_bar.original_image);
 }
 
 status = "normal";
@@ -151,11 +151,14 @@ Plymouth.SetQuitFunction(quit_callback);
 Plymouth.SetDisplayMessageFunction(display_message_callback);
 Plymouth.SetHideMessageFunction(hide_message_callback);
 
+
+
 if (Plymouth.GetMode() == "boot") {
     progress_box.sprite.SetPosition(progress_box.x, progress_box.y, 0);
     progress_bar.sprite.SetPosition(progress_bar.x, progress_bar.y, 1);
 
     Plymouth.SetBootProgressFunction(progress_callback);
+    Plymouth.SetQuitFunction(boot_complete);
 }
 
 if (Plymouth.GetMode() == "shutdown") {

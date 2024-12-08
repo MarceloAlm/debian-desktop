@@ -23,7 +23,7 @@ fi
 
 # Testa o tema configurado
 echo "Iniciando teste do Plymouth. Pressione Ctrl+C para sair."
-sudo plymouthd --debug-file=./plymouthd.log --pid-file=./plymouthd.pid
+sudo plymouthd --debug-file=/tmp/plymouthd.log --pid-file=/tmp/plymouthd.pid
 sudo plymouth change-mode --boot-up
 sudo plymouth --show-splash 
     sleep 5
