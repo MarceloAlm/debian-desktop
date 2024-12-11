@@ -43,6 +43,6 @@ do
     done;
 done;
 
-cp -r ./build/debian-white-branded/ /usr/share/plymouth/themes/
+#cp -r ./build/debian-white-branded/ /usr/share/plymouth/themes/
 
 echo "Done!"
