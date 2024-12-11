@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=blue-ink-splash-nobrand
+Description=blue-ink-splash-nobrand
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/blue-ink-splash-nobrand
+ScriptFile=/usr/share/plymouth/themes/blue-ink-splash-nobrand/blue-ink-splash-nobrand.script

@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=blue-debian
+Description=blue-debian
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/blue-debian
+ScriptFile=/usr/share/plymouth/themes/blue-debian/blue-debian.script

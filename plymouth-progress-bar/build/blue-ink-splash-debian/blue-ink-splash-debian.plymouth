@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=blue-ink-splash-debian
+Description=blue-ink-splash-debian
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/blue-ink-splash-debian
+ScriptFile=/usr/share/plymouth/themes/blue-ink-splash-debian/blue-ink-splash-debian.script
