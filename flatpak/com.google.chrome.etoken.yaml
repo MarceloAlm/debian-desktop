@@ -1,0 +1,42 @@
+app-id: com.google.Chrome.Custom
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: google-chrome-stable
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+  - --filesystem=home
+  - --filesystem=xdg-config/pki
+  - --talk-name=org.a11y.Bus
+  - --talk-name=org.freedesktop.secrets
+  - --env=SSL_DIR=/app/etc/ssl
+
+deps:
+  - name: pcsclite
+    buildsystem: simple
+    sources:
+      - type: apt
+        packages:
+          - pcscd
+          - libpcsclite1
+
+extensions:
+  com.google.Chrome.etoken:
+    directory: lib/etoken
+    version: '1.0'
+    merge-dirs: true
+    sources:
+      - type: archive
+        url: https://nullroute.lt/tmp/2023/pkg/SAC_Linux_10.8.105_R1_GA.zip
+        dest-filename: SAC_Linux.zip
+      - type: shell
+        commands:
+          - unzip SAC_Linux.zip
+          - ar x safenetauthenticationclient-core_10.8.1050_amd64.deb
+          - tar xf data.tar.xz
+          - cp -r usr/lib/* /app/lib/etoken/
+          - mkdir -p /app/etc/ssl/nssdb
+          - modutil -dbdir /app/etc/ssl/nssdb -add "eToken" --module /app/lib/etoken/libeToken.so
