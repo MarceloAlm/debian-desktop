@@ -1,0 +1,18 @@
+#https://docs.flatpak.org/en/latest/extension.html
+
+id: org.flatpak.app
+runtime: org.gnome.Platform
+runtime-version: '45'
+sdk: org.gnome.Sdk
+command: foo
+add-extensions:
+  org.flatpak.app.plugin:
+    version: '1.0'
+    directory: extension_directory
+    add-ld-path: lib
+    merge-dirs: plug-ins;help
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+cleanup-commands:
+  - mkdir -p ${FLATPAK_DEST}/extension_directory
